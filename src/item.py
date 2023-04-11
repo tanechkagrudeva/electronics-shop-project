@@ -23,6 +23,7 @@ class Item:
         Item.all.append(self)
 
 
+
     """добававляем геттер и сеттер для `name`, используя @property"""
     @property
     def private_name(self):
@@ -30,7 +31,7 @@ class Item:
 
     @private_name.setter
     def private_name(self, name):
-        if len.name > 10:
+        if len.name <= 10:
             self.__name = name
         else:
             print("Длина наименования товара превышает 10 символов")
@@ -61,12 +62,9 @@ class Item:
                 name, price, quantity = row
                 cls(name, price, quantity)
 
-
-
-    """статический метод, возвращающий число из числа-строки"""
     @staticmethod
-    def string_to_number(a):
-        return int(a)
+    def string_to_number(num):
+        print(int(float(num)))
 
 
 
