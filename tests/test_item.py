@@ -19,3 +19,10 @@ def test_apply_discount(item_obj):
 def test_string_to_number(item_obj):
     assert Item.string_to_number(7.1) == 7
 
+def test___repr__(item_obj):
+    assert Item.__repr__(item_obj) == "Item('Пылесос', 1000, 20)"
+
+def test___str__(item_obj):
+    assert Item.__str__(item_obj) == 'Пылесос'
+
+
