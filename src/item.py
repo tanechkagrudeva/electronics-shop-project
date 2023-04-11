@@ -26,15 +26,16 @@ class Item:
 
     """добававляем геттер и сеттер для `name`, используя @property"""
     @property
-    def private_name(self):
+    def name(self):
         return self.__name
 
-    @private_name.setter
-    def private_name(self, name):
-        if len.name <= 10:
+    @name.setter
+    def name(self, name):
+        if len(name) <= 10:
             self.__name = name
         else:
             print("Длина наименования товара превышает 10 символов")
+
 
 
     def calculate_total_price(self) -> float:
@@ -56,15 +57,15 @@ class Item:
     """класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv"""
     @classmethod
     def instantiate_from_csv(cls, filename):
+        Item.all.clear()
         with open(filename, encoding='windows-1251') as r_file:
             file_reader = csv.DictReader(r_file)
             for row in file_reader:
-                name, price, quantity = row
-                cls(name, price, quantity)
+                cls(row['name'], row['price'], row['quantity'])
 
     @staticmethod
     def string_to_number(num):
-        print(int(float(num)))
+        return int(float(num))
 
 
 
