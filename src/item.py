@@ -1,8 +1,12 @@
 import csv
 
+
 class InstantiateCSVError(Exception):
     pass
+
+
 class Item:
+
     """
     Класс для представления товара в магазине.
     """
@@ -65,19 +69,26 @@ class Item:
 
     """класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv"""
     @classmethod
-    def instantiate_from_csv(cls, filename):
+    def instantiate_from_csv(cls, filename=" "):
         """проверка на наличие файла"""
         try:
             Item.all.clear()
             with open(filename, encoding='windows-1251') as r_file:
                 file_reader = csv.DictReader(r_file)
+                for row in file_reader:
+                    if len(row) < 3 or row.get(None):
+                        raise InstantiateCSVError('_Файл item.csv поврежден_')
+                    cls(row['name'], row['price'], row['quantity'])
+
         except FileNotFoundError:
             print("_Отсутствует файл item.csv_")
-        else:
-            for row in file_reader:
-                cls(row['name'], row['price'], row['quantity'])
-                if file_reader is not row['quantity']:
-                    raise InstantiateCSVError('_Файл item.csv поврежден_')
+            return "_Отсутствует файл item.csv_"
+
+        except InstantiateCSVError:
+            print('_Файл item.csv поврежден_')
+            return "_Файл item.csv поврежден_"
+
+
 
 
     @staticmethod

@@ -39,3 +39,7 @@ def test__str__(phone_obj):
 
 def test__init__(phone_obj):
     assert phone_obj.number_of_sim == 4
+
+def test_instantiate_from_csv(item_obj):
+    assert item_obj.instantiate_from_csv() == "_Отсутствует файл item.csv_"
+    assert item_obj.instantiate_from_csv('../src/item_1.csv') == "_Файл item.csv поврежден_"
